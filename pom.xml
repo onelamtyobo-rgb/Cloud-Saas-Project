@@ -7,13 +7,13 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.cloudpilot</groupId>
-    <artifactId>cloudpilot-ai</artifactId>
+    <groupId>com.cloudobserve</groupId>
+    <artifactId>cloud-observe</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>CloudPilot AI</name>
+    <name>Cloud Observe</name>
     <description>
-        AI-powered cloud readiness, security, compliance and migration
+        cloud readiness, security, compliance and migration
         assessment platform.
     </description>
 
@@ -21,9 +21,25 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <junit.version>5.14.3</junit.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
+
     <dependencies>
+        <!-- JUnit 5 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.13.4</version>
+            <scope>test</scope>
+        </dependency>
 
 
     </dependencies>

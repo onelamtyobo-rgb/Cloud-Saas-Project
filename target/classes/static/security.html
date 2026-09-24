@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureStart - Cybersecurity Risk Assessment</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.min.js"></script>
+    <style>
+        .risk-badge { display: inline-block; padding: 5px 15px; border-radius: 20px; color: white; font-weight: bold; margin-left: 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <button onclick="window.history.back()" style="width: auto; margin-bottom: 20px; background: #667eea;">← Back to Cloud Observe</button>
+
+    <h1> SecureStart</h1>
+    <p class="subtitle">Cybersecurity Risk Assessment Tool</p>
+
+    <div class="section">
+        <h2>Business Profile</h2>
+        <div class="form-group">
+            <label>Business Name *</label>
+            <input type="text" id="bizName" value="TechCorp Inc">
+        </div>
+        <div class="form-group">
+            <label>Industry *</label>
+            <input type="text" id="bizIndustry" value="Technology">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Risk Assessment Questionnaire</h2>
+        <div class="info-box">Please answer Yes or No to calculate your security risk score.</div>
+        <div class="radio-group" id="securityQuestions">
+            <!-- Injected by JS -->
+        </div>
+        <button onclick="generateSecurityReport()">Generate Security Report</button>
+    </div>
+
+    <div id="securityResult" class="result hidden"></div>
+</div>
+
+<script src="/js/security.js"></script>
+</body>
+</html>

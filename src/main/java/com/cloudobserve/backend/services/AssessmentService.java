@@ -2,15 +2,12 @@ package com.cloudobserve.backend.services;
 
 import com.cloudobserve.backend.models.Assessment;
 import com.cloudobserve.backend.models.Company;
-import com.cloudobserve.backend.models.Infrastructure;
 import com.cloudobserve.backend.repositories.AssessmentRepository;
 import com.cloudobserve.backend.repositories.CompanyRepository;
-import com.cloudobserve.backend.repositories.InfrastructureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -21,9 +18,6 @@ public class AssessmentService {
 
     @Autowired
     private CompanyRepository companyRepository;
-
-    @Autowired
-    private InfrastructureRepository infrastructureRepository;
 
     public Assessment createAssessment(Long companyId, Assessment.AssessmentType type) {
         Company company = companyRepository.findById(companyId)
@@ -54,46 +48,34 @@ public class AssessmentService {
 
     private int calculateScore(Assessment.AssessmentType type, Map<String, Integer> answers) {
         int totalScore = 0;
-        int maxScore = 0;
+        int maxScore = answers.size() * 5;
 
-        for (Map.Entry<String, Integer> entry : answers.entrySet()) {
-            totalScore += entry.getValue();
-            maxScore += 5; // Assuming each question is scored 0-5
+        for (Integer value : answers.values()) {
+            totalScore += value;
         }
 
-        return (totalScore * 100) / maxScore;
+        return maxScore > 0 ? (totalScore * 100) / maxScore : 0;
     }
 
     private String generateRecommendations(Assessment.AssessmentType type, int score) {
-        StringBuilder recommendations = new StringBuilder();
-
         if (type == Assessment.AssessmentType.READINESS) {
             if (score < 50) {
-                recommendations.append("Low readiness. Recommend: 1) Conduct infrastructure audit, 2) Train IT staff on cloud fundamentals, 3) Start with non-critical workloads.");
+                return "Low readiness. Recommend infrastructure audit and staff training.";
             } else if (score < 80) {
-                recommendations.append("Moderate readiness. Recommend: 1) Develop migration roadmap, 2) Establish cloud governance policies, 3) Pilot with select applications.");
+                return "Moderate readiness. Develop migration roadmap and governance policies.";
             } else {
-                recommendations.append("High readiness. Recommend: 1) Begin phased migration, 2) Implement cloud cost management, 3) Optimize for cloud-native architectures.");
+                return "High readiness. Begin phased migration.";
             }
-        } else if (type == Assessment.AssessmentType.SECURITY) {
+        } else {
+            // This now cleanly handles COMPLIANCE (and any other future non-readiness types)
             if (score < 50) {
-                recommendations.append("Critical security gaps. Recommend: 1) Implement identity and access management, 2) Enable encryption at rest and in transit, 3) Deploy security monitoring tools.");
+                return "Major compliance issues. Identify regulations and implement governance.";
             } else if (score < 80) {
-                recommendations.append("Good security posture. Recommend: 1) Regular security audits, 2) Implement zero-trust architecture, 3) Enhance incident response procedures.");
+                return "Moderate compliance. Document procedures and conduct audits.";
             } else {
-                recommendations.append("Excellent security. Recommend: 1) Continuous compliance monitoring, 2) Advanced threat detection, 3) Security automation.");
-            }
-        } else if (type == Assessment.AssessmentType.COMPLIANCE) {
-            if (score < 50) {
-                recommendations.append("Major compliance issues. Recommend: 1) Identify applicable regulations (GDPR, HIPAA, SOC2), 2) Implement data governance framework, 3) Conduct compliance gap analysis.");
-            } else if (score < 80) {
-                recommendations.append("Moderate compliance. Recommend: 1) Document compliance procedures, 2) Regular audits and assessments, 3) Employee compliance training.");
-            } else {
-                recommendations.append("Strong compliance. Recommend: 1) Automated compliance monitoring, 2) Regular third-party audits, 3) Stay updated on regulatory changes.");
+                return "Strong compliance. Automated monitoring recommended.";
             }
         }
-
-        return recommendations.toString();
     }
 
     public Assessment getAssessment(Long id) {

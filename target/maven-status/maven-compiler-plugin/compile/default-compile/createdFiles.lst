@@ -1,1 +1,11 @@
+com\cloudobserve\backend\repositories\InfrastructureRepository.class
+com\cloudobserve\backend\CloudObserveApplication.class
+com\cloudobserve\backend\services\AssessmentService.class
+com\cloudobserve\backend\repositories\AssessmentRepository.class
+com\cloudobserve\backend\models\Assessment$AssessmentType.class
+com\cloudobserve\backend\models\Infrastructure.class
+com\cloudobserve\backend\controllers\CompanyController.class
+com\cloudobserve\backend\models\Company.class
 com\cloudobserve\backend\controllers\AssessmentController.class
+com\cloudobserve\backend\repositories\CompanyRepository.class
+com\cloudobserve\backend\models\Assessment.class

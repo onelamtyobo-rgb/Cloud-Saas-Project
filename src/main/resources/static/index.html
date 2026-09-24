@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Observe - Cloud Readiness</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>☁️ Cloud Observe</h1>
+    <p class="subtitle">Professional Cloud Readiness Assessment</p>
+
+    <!-- Step 1: Company Info -->
+    <div class="section">
+        <h2>Step 1: Company Information</h2>
+        <div class="form-group">
+            <label>Company Name *</label>
+            <input type="text" id="companyName" value="TechCorp Inc">
+        </div>
+        <div class="form-group">
+            <label>Industry *</label>
+            <input type="text" id="industry" value="Technology">
+        </div>
+        <div class="form-group">
+            <label>Number of Employees *</label>
+            <input type="number" id="employeeCount" value="3" min="1">
+        </div>
+        <div class="form-group">
+            <label>Current Server Setup *</label>
+            <select id="serverSetup">
+                <option value="on-premises">On-Premises</option>
+                <option value="hybrid">Hybrid</option>
+                <option value="cloud">Cloud-Native</option>
+            </select>
+        </div>
+        <button onclick="createCompany()">Create Company Profile</button>
+        <div id="companyResult" class="result hidden"></div>
+    </div>
+
+    <!-- Step 2: Assessment Type -->
+    <div class="section hidden" id="assessmentSection">
+        <h2>Step 2: Select Assessment Type</h2>
+        <div class="form-group">
+            <label>Assessment Type *</label>
+            <select id="assessmentType">
+                <option value="READINESS">Cloud Readiness Assessment</option>
+                <option value="COMPLIANCE">Compliance & Governance</option>
+            </select>
+        </div>
+        <button onclick="createAssessment()">Create Assessment</button>
+        <div id="assessmentResult" class="result hidden"></div>
+    </div>
+
+    <!-- Step 3: Cloud Details -->
+    <div class="section hidden" id="completeSection">
+        <h2>Step 3: Complete Cloud Assessment</h2>
+
+        <h3>Current Infrastructure Resources</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item"><input type="checkbox" id="res_servers" value="Servers"><label style="margin:0">Physical/Virtual Servers</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="res_storage" value="Storage"><label style="margin:0">Storage Systems</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="res_network" value="Networking"><label style="margin:0">Networking Equipment</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="res_db" value="Databases"><label style="margin:0">Database Systems</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="res_backup" value="Backup"><label style="margin:0">Backup Solutions</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="res_disaster" value="Disaster Recovery"><label style="margin:0">Disaster Recovery</label></div>
+        </div>
+
+        <h3>Budget & Timeline</h3>
+        <div class="form-group">
+            <label>Estimated Cloud Budget (ZAR) *</label>
+            <select id="budget">
+                <option value="<50k">Less than R50,000 (Startup/SMB)</option>
+                <option value="50k-150k">R50,000 - R150,000</option>
+                <option value="150k-500k">R150,000 - R500,000</option>
+                <option value=">500k">Over R500,000 (Enterprise)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Migration Timeline *</label>
+            <select id="timeline">
+                <option value="immediate">Immediate (0-3 months)</option>
+                <option value="short">Short-term (3-6 months)</option>
+                <option value="medium">Medium-term (6-12 months)</option>
+            </select>
+        </div>
+
+        <button onclick="completeAssessment()">Complete & Get Cloud Results</button>
+        <div id="finalResult" class="result hidden"></div>
+    </div>
+</div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
